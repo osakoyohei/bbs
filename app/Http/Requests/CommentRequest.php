@@ -25,7 +25,6 @@ class CommentRequest extends FormRequest
     {
         return [
             'comment_store' => 'required',
-            'user_id' => 'required',
             'post_id' => 'required',
         ];
     }
