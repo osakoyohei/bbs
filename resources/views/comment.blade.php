@@ -32,7 +32,6 @@
                         </div>
                     @endif
                 </div>
-                <input type="hidden" name="user_id" value="{{ Auth::id() }}">
                 <input type="hidden" name="post_id" value="{{ $post->id }}">
                 <a class="btn btn-secondary" href="/bbs/comment/{{ $post->id }}">キャンセル</a>
                 <button type="submit" class="btn btn-primary">コメントする</button>

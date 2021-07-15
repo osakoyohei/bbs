@@ -13,16 +13,13 @@ class CreateRepliesTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('replies')) {
-            Schema::create('replies', function (Blueprint $table) {
-                $table->id();
-                $table->integer('user_id');
-                $table->integer('comment_id');
-                $table->text('reply');
-                $table->timestamps();
-            });
-        }
-
+        Schema::create('replies', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('comment_id')->constrained('comments')->onUpdate('cascade')->onDelete('cascade');
+            $table->text('reply');
+            $table->timestamps();
+        });
     }
 
     /**
