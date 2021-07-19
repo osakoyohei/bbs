@@ -28,4 +28,9 @@ class Post extends Model
         return $this->belongsTo(\App\Models\User::class, 'user_id');
     }
 
+    public function comment_admin()
+    {
+        return $this->hasMany(Comment::class, 'post_id');
+    }
+
 }
