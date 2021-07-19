@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('category', 'user')->get();
+        $posts = Post::with('category', 'user')->where('private', 0)->get();
         $categories = Category::all();
 
         return view('home', [
@@ -59,6 +59,11 @@ class HomeController extends Controller
         $comments = Comment::with('user', 'comments', 'replies')->where('post_id', $post->id)->get();
         if (is_null($comments)) {
             return redirect(route('home'))->with('status', 'データがありません');
+        }
+
+        //掲示板投稿private=0の場合、コメントビュー非表示
+        if ($post->private > 0) {
+            $post = '';
         }
         
         return view('comment', [
