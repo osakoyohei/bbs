@@ -33,6 +33,7 @@ class CommentController extends AdminController
 
         $grid->column('post_id', __('Post id'));
         $grid->column('comment', 'コメント')->filter('like');
+        $grid->column('private', __('表示(0)・非表示(1)'))->filter();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -53,6 +54,7 @@ class CommentController extends AdminController
         $show->field('user_id', __('User id'));
         $show->field('post_id', __('Post id'));
         $show->field('comment', __('Comment'));
+        $show->field('private', __('表示(0)・非表示(1)'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -76,6 +78,7 @@ class CommentController extends AdminController
         $form->number('user_id', __('User id'));
         $form->number('post_id', __('Post id'));
         $form->textarea('comment', __('Comment'));
+        $form->number('private', __('表示(0)・非表示(1)'));
 
         return $form;
     }

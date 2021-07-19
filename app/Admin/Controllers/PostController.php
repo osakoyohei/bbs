@@ -37,7 +37,8 @@ class PostController extends AdminController
 
         // $grid->column('category_id', __('Category id'));
         $grid->category()->name('カテゴリー名')->filter('like');
-
+        
+        $grid->column('private', __('表示(0)・非表示(1)'))->filter();
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -60,6 +61,7 @@ class PostController extends AdminController
         $show->field('thumbnail_image', __('Thumbnail image'));
         $show->field('content', __('Content'));
         $show->field('category_id', __('Category id'));
+        $show->field('private', __('表示(0)・非表示(1)'));
         $show->field('created_at', __('Created at'));
         $show->field('updated_at', __('Updated at'));
 
@@ -85,6 +87,7 @@ class PostController extends AdminController
         $form->text('thumbnail_image', __('Thumbnail image'));
         $form->textarea('content', __('Content'));
         $form->number('category_id', __('Category id'));
+        $form->number('private', __('表示(0)・非表示(1)'));
 
         return $form;
     }
