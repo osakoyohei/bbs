@@ -94,7 +94,7 @@ class HomeController extends Controller
             abort(500);
         }
 
-        return redirect('/bbs/comment/'.$request->post_id)->with('status', 'コメントを投稿しました');
+        return redirect(route('comment', $request->post_id))->with('status', 'コメントを投稿しました');
     }
 
     public function showReply($id)
@@ -137,7 +137,7 @@ class HomeController extends Controller
             abort(500);
         }
 
-        return redirect('/bbs/comment/reply/'.$request->comment_id)->with('status', 'コメントに返信しました');
+        return redirect(route('reply', $request->comment_id))->with('status', 'コメントに返信しました');
     }
 
     public function titleSearch(Request $request)

@@ -56,7 +56,7 @@
                 <img src="{{ '/storage/' . $post->thumbnail_image }}">
                 <p>投稿内容：{{ $post->content }}</p>
                 <p>カテゴリー名：{{ $post->category->name }}</p>
-                <a href="/bbs/comment/{{ $post->id }}" class="btn btn-primary">コメント投稿</a>
+                <a href="{{ route('comment', $post->id) }}" class="btn btn-primary">コメント投稿</a>
                 <hr>
             @endforeach
 
