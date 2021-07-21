@@ -46,11 +46,11 @@
                         <p>投稿者：{{ $comment->user->name }}</p>
                         <p>投稿日時：{{ $comment->created_at->format('Y/m/d/H:i') }}</p>
                         <p>コメント：{{ $comment->comment }}</p>
-                        <a href="/bbs/comment/reply/{{ $comment->id }}" class="badge badge-primary">返信:{{ $comment->replies->count() }}件</a>
+                        <a href="{{ route('reply', $comment->id) }}" class="badge badge-primary">返信:{{ $comment->replies->count() }}件</a>
                         <hr>
                     @else
                         <p>非表示となった投稿</p>
-                        <a href="/bbs/comment/reply/{{ $comment->id }}" class="badge badge-primary">返信:{{ $comment->replies->count() }}件</a>
+                        <a href="{{ route('reply', $comment->id) }}" class="badge badge-primary">返信:{{ $comment->replies->count() }}件</a>
                         <hr>
                     @endif
                 @endforeach

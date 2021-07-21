@@ -14,7 +14,10 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        DB::table('categories')->truncate();
+        
         DB::table('categories')->insert([
             [
                 'id' => '1',
@@ -35,5 +38,8 @@ class CategoriesTableSeeder extends Seeder
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
         ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
     }
 }
