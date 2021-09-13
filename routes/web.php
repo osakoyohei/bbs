@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+// ゲストログイン
+Route::get('/login/guest', [App\Http\Controllers\Auth\LoginController::class, 'guestLogin'])->name('login.guest');
+
 Route::group(['middleware' => 'auth'], function () {
 //掲示板投稿一覧を表示
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
