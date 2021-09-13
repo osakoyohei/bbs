@@ -16,15 +16,12 @@ class CategoriesTableSeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'id' => '1',
                 'name' => 'カテゴリ−1',
             ],
             [
-                'id' => '2',
                 'name' => 'カテゴリ−2',
             ],
             [
-                'id' => '3',
                 'name' => 'カテゴリ−3',
             ],
         ]);
