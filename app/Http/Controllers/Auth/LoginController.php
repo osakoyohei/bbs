@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -36,5 +37,20 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * ゲストログイン処理。
+     */
+    public function guestLogin()
+    {
+        $email = 'guest@guest.jp';
+        $password = 'password';
+
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            return redirect(route('home'))->with('success', 'ゲストログインに成功しました！');
+        }
+
+        return redirect(route('login.show'));
     }
 }
