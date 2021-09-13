@@ -29,5 +29,9 @@ class Comment extends Model
     public function replies() {
         return $this->hasMany(\App\Models\Reply::class, 'comment_id');
     }
-
+    
+     public function replies_admin()
+     {
+         return $this->hasMany(Reply::class);
+     }
 }

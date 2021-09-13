@@ -31,8 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
-        $posts->load('category', 'user');
+        $posts = Post::with('category', 'user')->where('private', 0)->get();
         $categories = Category::all();
 
         return view('home', [
@@ -53,13 +52,20 @@ class HomeController extends Controller
     public function comment($id)
     {
         $post = Post::find($id);
-        $comments = Comment::where('post_id', $post->id)->get();
-        $comments->load('user', 'comments', 'replies');
-
         if (is_null($post)) {
             return redirect(route('home'))->with('status', 'データがありません');
         }
 
+        $comments = Comment::with('user', 'comments', 'replies')->where('post_id', $post->id)->get();
+        if (is_null($comments)) {
+            return redirect(route('home'))->with('status', 'データがありません');
+        }
+
+        //掲示板投稿private=0の場合、コメントビュー非表示
+        if ($post->private > 0) {
+            $post = '';
+        }
+        
         return view('comment', [
             'post' => $post,
             'comments' => $comments,
@@ -68,11 +74,18 @@ class HomeController extends Controller
 
     public function commentStore(CommentRequest $request)
     {
+        $user_id = \Auth::id();
+
+        $post_id = $request->post_id;
+        if (is_null($post_id)) {
+            return redirect(route('home'))->with('status', 'データがありません');
+        }
+
         \DB::beginTransaction();
         try {
             Comment::create([
-                'user_id' => $request->user_id,
-                'post_id' => $request->post_id,
+                'user_id' => $user_id,
+                'post_id' => $post_id,
                 'comment' => $request->comment_store,
             ]);
             \DB::commit();
@@ -81,19 +94,21 @@ class HomeController extends Controller
             abort(500);
         }
 
-        return redirect('/bbs/comment/'.$request->post_id)->with('status', 'コメントを投稿しました');
+        return redirect(route('comment', $request->post_id))->with('status', 'コメントを投稿しました');
     }
 
     public function showReply($id)
     {
         $comment = Comment::find($id);
-        $replies = Reply::where('comment_id', $comment->id)->get();
-        $replies->load('user');
-
         if (is_null($comment)) {
             return redirect(route('home'))->with('status', 'データがありません');
         }
 
+        $replies = Reply::with('user')->where('comment_id', $comment->id)->get();
+        if (is_null($replies)) {
+            return redirect(route('home'))->with('status', 'データがありません');
+        }
+        
         return view('reply', [
             'comment' => $comment,
             'replies' => $replies,
@@ -102,11 +117,18 @@ class HomeController extends Controller
 
     public function commentReply(ReplyRequest $request)
     {
+        $user_id = \Auth::id();
+
+        $comment_id = $request->comment_id;
+        if (is_null($comment_id)) {
+            return redirect(route('home'))->with('status', 'データがありません');
+        }
+
         \DB::beginTransaction();
         try {
             Reply::create([
-                'user_id' => $request->user_id,
-                'comment_id' => $request->comment_id,
+                'user_id' => $user_id,
+                'comment_id' => $comment_id,
                 'reply' => $request->reply,
             ]);
             \DB::commit();
@@ -115,13 +137,12 @@ class HomeController extends Controller
             abort(500);
         }
 
-        return redirect('/bbs/comment/reply/'.$request->comment_id)->with('status', 'コメントに返信しました');
+        return redirect(route('reply', $request->comment_id))->with('status', 'コメントに返信しました');
     }
 
     public function titleSearch(Request $request)
     {
-        $posts = Post::where('title', 'like', "%{$request->title_search}%")->paginate();
-        $posts->load('category', 'user');
+        $posts = Post::with('category', 'user')->where('title', 'like', "%{$request->title_search}%")->paginate();
         $categories = Category::all();
 
         $serach_result = $request->title_search. 'の検索結果 '. $posts->total(). '件';
@@ -135,8 +156,7 @@ class HomeController extends Controller
 
     public function categorySearch(Request $request)
     {
-        $posts = Post::where('category_id', $request->category_search)->paginate();
-        $posts->load('category', 'user');
+        $posts = Post::with('category', 'user')->where('category_id', $request->category_search)->paginate();
         $categories = Category::all();
 
         $category_name = Category::find($request->category_search)->name;
@@ -151,7 +171,7 @@ class HomeController extends Controller
 
     public function store(PostRequest $request)
     {
-        $user = \Auth::user();
+        $user_id = \Auth::id();
         $image = $request->file('image');
 
         if ($request->hasFile('image')) {
@@ -164,11 +184,11 @@ class HomeController extends Controller
         \DB::beginTransaction();
         try {
             Post::create([
-                'user_id' => $user['id'],
-                'title' => $request['title'],
+                'user_id' => $user_id,
+                'title' => $request->title,
                 'thumbnail_image' => $path[1],
-                'content' => $request['content'],
-                'category_id' => $request['category'],
+                'content' => $request->content,
+                'category_id' => $request->category,
             ]);
             \DB::commit();
         } catch(\Throwable $e) {
