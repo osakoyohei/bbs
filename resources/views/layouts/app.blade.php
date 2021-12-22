@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -53,7 +56,7 @@
                             @endif
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login.guest') }}">GuestLogin</a>
+                                <a class="nav-link" href="{{ route('login.guest') }}">{{ __('Guest Login') }}</a>
                             </li>
                         @else
                             <li class="nav-item dropdown">
