@@ -9,5 +9,6 @@
     "Password": "パスワード",
     "Confirm Password": "パスワード(確認用)",
     "Remember Me": "ログイン状態を保存",
-    "Guest Login": "ゲストログイン"
+    "Guest Login": "ゲストログイン",
+    "Logout": "ログアウト"
 }
