@@ -19,7 +19,7 @@
                 <p>投稿者：{{ $post->user->name }}</p>
                 <p>投稿日時：{{ $post->created_at->format('Y/m/d/H:i') }}</p>
                 <p>タイトル：{{ $post->title }}</p>
-                <p><img src="{{ '/storage/' . $post->thumbnail_image }}"></p>
+                <p><img src="data:image/png;base64,{{ $post->thumbnail_image }}"></p>
                 <p>投稿内容：{{ $post->content }}</p>
                 <p>カテゴリー名：{{ $post->category->name }}</p>
                 <hr>
