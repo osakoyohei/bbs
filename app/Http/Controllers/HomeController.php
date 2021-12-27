@@ -172,21 +172,22 @@ class HomeController extends Controller
     public function store(PostRequest $request)
     {
         $user_id = \Auth::id();
-        $image = $request->file('image');
+        $humbnail_image = base64_encode(file_get_contents($request->image));
 
-        if ($request->hasFile('image')) {
-            $path = \Storage::put('public', $image);
-            $path = explode('/', $path);
-        } else {
-            $path = null;
-        }
+        // $image = $request->file('image');
+        // if ($request->hasFile('image')) {
+        //     $path = \Storage::put('public', $image);
+        //     $path = explode('/', $path);
+        // } else {
+        //     $path = null;
+        // }
 
         \DB::beginTransaction();
         try {
             Post::create([
                 'user_id' => $user_id,
                 'title' => $request->title,
-                'thumbnail_image' => $path[1],
+                'thumbnail_image' => $humbnail_image,
                 'content' => $request->content,
                 'category_id' => $request->category,
             ]);
