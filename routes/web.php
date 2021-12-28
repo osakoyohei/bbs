@@ -29,6 +29,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::get('/bbs/create', [App\Http\Controllers\HomeController::class, 'create'])->name('create');
 //掲示板投稿
 Route::post('/bbs/store', [App\Http\Controllers\HomeController::class, 'store'])->name('store');
+//掲示板投稿削除
+Route::post('/bbs/delete/{id}', [App\Http\Controllers\HomeController::class, 'delete'])->name('delete');
 //コメント投稿画面を表示
 Route::get('/bbs/comment/{id}', [App\Http\Controllers\HomeController::class, 'comment'])->name('comment');
 //コメント投稿

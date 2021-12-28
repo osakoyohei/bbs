@@ -200,6 +200,19 @@ class HomeController extends Controller
         return redirect(route('home'))->with('status', '掲示板を投稿しました');
     }
 
-
+    public function delete($id)
+    {
+        if (is_null($id)) {
+            return redirect(route('home'))->with('status', 'データがありません');
+        }
+        
+        try {
+            Post::destroy($id);
+        } catch(\Throwable $e) {
+            abort(500);
+        }
+        
+        return redirect(route('home'))->with('status', '掲示板を削除しました！');
+    }
 
 }

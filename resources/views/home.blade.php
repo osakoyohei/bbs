@@ -56,7 +56,16 @@
                 <img src="data:image/png;base64,{{ $post->thumbnail_image }}">
                 <p>投稿内容：{{ $post->content }}</p>
                 <p>カテゴリー名：{{ $post->category->name }}</p>
-                <a href="{{ route('comment', $post->id) }}" class="btn btn-primary">コメント投稿</a>
+                <p><a href="{{ route('comment', $post->id) }}" class="btn btn-primary">コメント投稿</a></p>
+                
+                @if ($post->user_id === Auth::id())
+                    <form method="POST" action="{{ route('delete', $post->id) }}" >
+                    @csrf
+                        <button type="submit">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+                @endif
                 <hr>
             @endforeach
 
