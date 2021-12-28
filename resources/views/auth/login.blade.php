@@ -57,6 +57,10 @@
                                     {{ __('Login') }}
                                 </button>
 
+                                <button type="submit" class="btn btn-success">
+                                    <a style="color: white;" href="{{ route('login.guest') }}">{{ __('Guest Login') }}</a>
+                                </button>
+
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
