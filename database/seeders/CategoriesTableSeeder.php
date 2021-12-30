@@ -16,13 +16,25 @@ class CategoriesTableSeeder extends Seeder
     {
         DB::table('categories')->insert([
             [
-                'name' => 'カテゴリ−1',
+                'name' => '社 会・出 来 事',
             ],
             [
-                'name' => 'カテゴリ−2',
+                'name' => '学 問・教 育',
             ],
             [
-                'name' => 'カテゴリ−3',
+                'name' => '暮 ら し・生 活',
+            ],
+            [
+                'name' => '趣 味・文 化',
+            ],
+            [
+                'name' => '芸 能・放 送',
+            ],
+            [
+                'name' => '雑 談・ネ タ',
+            ],
+            [
+                'name' => 'その他',
             ],
         ]);
     }
