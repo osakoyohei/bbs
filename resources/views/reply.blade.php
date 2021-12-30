@@ -33,7 +33,7 @@
                         @endif
                     </div>
                     <input type="hidden" name="comment_id" value="{{ $comment->id }}">
-                    <a class="btn btn-secondary" href="/bbs/comment/reply/{{ $comment->id }}">キャンセル</a>
+                    <a class="btn btn-secondary" href="{{ route('reply', $comment->id) }}">キャンセル</a>
                     <button type="submit" class="btn btn-primary">返信する</button>
                 </form>
             </div>
@@ -46,8 +46,6 @@
                 <hr>
             @endforeach
 
-
-            
         </div>
     </div>
 </div>
