@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('category', 'user')->where('private', 0)->get();
+        $posts = Post::with('category', 'user')->where('private', 0)->orderBy('created_at', 'desc')->get();
         $categories = Category::all();
 
         return view('home', [
@@ -71,7 +71,7 @@ class HomeController extends Controller
             return redirect(route('home'))->with('status', 'データがありません');
         }
 
-        $comments = Comment::with('user', 'comments', 'replies')->where('post_id', $post->id)->get();
+        $comments = Comment::with('user', 'comments', 'replies')->where('post_id', $post->id)->orderBy('created_at', 'desc')->get();
         if (is_null($comments)) {
             return redirect(route('home'))->with('status', 'データがありません');
         }
@@ -119,7 +119,7 @@ class HomeController extends Controller
             return redirect(route('home'))->with('status', 'データがありません');
         }
 
-        $replies = Reply::with('user')->where('comment_id', $comment->id)->get();
+        $replies = Reply::with('user')->where('comment_id', $comment->id)->orderBy('created_at', 'desc')->get();
         if (is_null($replies)) {
             return redirect(route('home'))->with('status', 'データがありません');
         }
