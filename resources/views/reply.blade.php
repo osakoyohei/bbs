@@ -11,13 +11,15 @@
                 </div>
             @endif
 
-            <h1>コメント返信</h1>
-            <a href="/bbs/comment/{{ $comment->post_id }}">戻る</a>
+            <h1 class="reply-title">コメント返信</h1>
+            {{-- <a href="/bbs/comment/{{ $comment->post_id }}">戻る</a> --}}
             <hr>
 
-            <p>投稿者：{{ $comment->user->name }}</p>
-            <p>投稿日時：{{ $comment->created_at->format('Y/m/d/H:i') }}</p>
-            <p>投稿内容：{{ $comment->comment }}</p>
+            <div class="reply-title">
+                <p>投稿者：{{ $comment->user->name }}</p>
+                <p>投稿日時：{{ $comment->created_at->format('Y/m/d/H:i') }}</p>
+                <p>投稿内容：{{ $comment->comment }}</p>
+            </div>
             <hr>
 
             <div class="card card-body">

@@ -11,25 +11,34 @@
                 </div>
             @endif
 
-            <h1>コメント投稿</h1><hr>
+            <h1 class="comment-title">コメント投稿一覧</h1><hr>
 
             @if ($post === '')
                 <p>非表示となった投稿</p>
             @else
-                <p>投稿者：{{ $post->user->name }}</p>
-                <p>投稿日時：{{ $post->created_at->format('Y/m/d/H:i') }}</p>
-                <p>タイトル：{{ $post->title }}</p>
-                <p><img src="data:image/png;base64,{{ $post->thumbnail_image }}"></p>
-                <p>投稿内容：{{ $post->content }}</p>
-                <p>カテゴリー名：{{ $post->category->name }}</p>
+                <div class="posts-flex">
+                    <div>
+                        <p>投稿者：{{ $post->user->name }}</p>
+                        <p>投稿日時：{{ $post->created_at->format('Y/m/d/H:i') }}</p>
+                        <p>タイトル：{{ $post->title }}</p>
+                        <p>投稿内容：<br>
+                            {{ $post->content }}
+                        </p>
+                        <p>カテゴリー名：{{ $post->category->name }}</p>
+                    </div>
+                    <div class="comment-thumbnail-image">
+                        <img src="data:image/png;base64,{{ $post->thumbnail_image }}">
+                    </div>
+                </div>
                 <hr>
 
+                @if ($post->id != Auth::id())
                 <form action="{{ route('comment.store') }}" method="POST">
                 @csrf
                     <div class="form-group">
                         <label for="comment">コメント</label>
                         <textarea id="comment" name="comment_store" class="form-control"  prows="4">{{ old('comment') }}</textarea>
-                        @if ($errors->has('comment_store'))
+                    @if ($errors->has('comment_store'))
                             <div class="text-danger">
                                 {{ $errors->first('comment_store') }}
                             </div>
@@ -40,6 +49,7 @@
                     <button type="submit" class="btn btn-primary">コメントする</button>
                 </form>
                 <hr>
+                @endif
             
                 @foreach($comments as $comment)
                     @if ($comment->private === 0)

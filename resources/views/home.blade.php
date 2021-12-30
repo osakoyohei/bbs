@@ -11,16 +11,16 @@
                 </div>
             @endif
 
-            <h3><a href="{{ route('create') }}">掲示板投稿をする</a></h3><br>
+            <h3 class="bbs-post"><a href="{{ route('create') }}">掲示板投稿をする</a></h3><br>
 
-            <h1>掲示板投稿一覧</h1>
+            <h1 class="bbs-title">掲示板投稿一覧</h1>
             <hr>
 
             <!-- 掲示板タイトルで検索 -->
             <form action="{{ route('title.search') }}" method="GET">
             @csrf
                 <div class="form-row align-items-center">
-                    <div class="col-sm-4 my-1">
+                    <div class="col-sm-6 my-1">
                         <label class="sr-only" for="inlineFormInputName">タイトルを入力してください</label>
                         <input type="text" class="form-control" id="inlineFormInputName" placeholder="タイトルを入力してください" name="title_search">
                     </div>
@@ -29,12 +29,11 @@
                     </div>
                 </div>
             </form>
-            <hr>
             
             <!-- カテゴリーで検索 -->
             <form class="form-inline" action="{{ route('category.search') }}" method="GET">
             @csrf
-                <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="category_search">
+                <select class="custom-select col-sm-6 col-auto my-1 mr-sm-2" id="inlineFormCustomSelectPref" name="category_search">
                     <option selected>カテゴリーを選択してください</option>
                     @foreach($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -44,27 +43,47 @@
             </form>
             <hr>
 
-            @isset($serach_result)
-                <h5>{{ $serach_result }}</h5><br>
-            @endisset
-
             <!-- 掲示板一覧 -->
             @foreach($posts as $post)
-                <p>投稿者：{{ $post->user->name }}</p>
-                <p>投稿日時：{{ $post->created_at->format('Y/m/d/H:i') }}</p>
-                <p>タイトル：{{ $post->title }}</p>
-                <img src="data:image/png;base64,{{ $post->thumbnail_image }}">
-                <p>投稿内容：{{ $post->content }}</p>
-                <p>カテゴリー名：{{ $post->category->name }}</p>
-                <p><a href="{{ route('comment', $post->id) }}" class="btn btn-primary">コメント投稿</a></p>
-                @if ($post->user_id === Auth::id())
-                    <form method="POST" action="{{ route('delete', $post->id) }}" >
-                    @csrf
-                        <button type="submit" class="btn btn-light" style="background-color: #DDDDDD">
-                            投稿削除
-                        </button>
-                    </form>
-                @endif
+            <div class="posts-flex">
+                
+                <div>
+                    @isset($serach_result)
+                    <h5 class="serach-result">{{ $serach_result }}</h5><br>
+                    @endisset
+                    <p>投稿者：{{ $post->user->name }}</p>
+                    <p>投稿日時：{{ $post->created_at->format('Y/m/d/H:i') }}</p>
+                    <p>タイトル：{{ $post->title }}</p>
+                    <p>投稿内容：{{ $post->content }}</p>
+                    <p>カテゴリー名：{{ $post->category->name }}</p>
+
+                    <div class="comment-delete-flex">
+                        <div>
+                            <p><a href="{{ route('comment', $post->id) }}" class="btn btn-primary">コメント</a></p>
+                        </div>
+                    @if ($post->user_id === Auth::id())
+                        <div>
+                            <form method="POST" action="{{ route('delete', $post->id) }}" >
+                            @csrf
+                                <button class="btn btn-light comment-post">
+                                    投稿削除
+                                </button>
+                            </form>
+                        </div>
+                    @else
+                        <div>
+                            <p class="other-post">
+                                他ユーザー投稿
+                            </p>
+                        </div>
+                    @endif
+                    </div>
+
+                </div>
+                <div class="post-thumbnail-image">
+                    <img src="data:image/png;base64,{{ $post->thumbnail_image }}">
+                </div>
+            </div>
                 <hr>
             @endforeach
 
