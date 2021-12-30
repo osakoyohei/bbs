@@ -1,9 +1,15 @@
 .bbs-post, .bbs-title, .comment-title, .reply-title {
     text-align: center;
+    text-decoration: none!important;
+    color: black;
 }
 
 .serach-result {
     margin-right: 5px;
+}
+
+.bbs-post {
+    text-align: center;
 }
 
 .posts-flex {

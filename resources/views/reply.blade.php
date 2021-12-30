@@ -11,8 +11,7 @@
                 </div>
             @endif
 
-            <h1 class="reply-title">コメント返信</h1>
-            {{-- <a href="/bbs/comment/{{ $comment->post_id }}">戻る</a> --}}
+            <a href="" class="reply-title"><h1>コメント返信</h1></a>
             <hr>
 
             <div class="reply-title">

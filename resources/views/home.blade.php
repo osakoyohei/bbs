@@ -11,9 +11,12 @@
                 </div>
             @endif
 
-            <h3 class="bbs-post"><a href="{{ route('create') }}">掲示板投稿をする</a></h3><br>
+            <div class="bbs-post">
+                <a class="btn btn-success" href="{{ route('create') }}" role="button">掲示板投稿をする</a>
+            </div>
+            <br>
 
-            <h1 class="bbs-title">掲示板投稿一覧</h1>
+            <a href="" class="bbs-title"><h1>掲示板投稿一覧</h1></a>
             <hr>
 
             <!-- 掲示板タイトルで検索 -->

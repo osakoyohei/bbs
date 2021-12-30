@@ -11,7 +11,7 @@
                 </div>
             @endif
 
-            <h1 class="comment-title">コメント投稿一覧</h1><hr>
+            <a href="" class="comment-title"><h1>コメント投稿一覧</h1></a><hr>
 
             @if ($post === '')
                 <p>非表示となった投稿</p>
