@@ -194,13 +194,12 @@ class HomeController extends Controller
             $thumbnail_image = base64_encode(file_get_contents($request->thumbnail_image));
         }
 
-
         \DB::beginTransaction();
         try {
             Post::create([
                 'user_id' => $user_id,
                 'title' => $request->title,
-                'thumbnail_image' => $shumbnail_image,
+                'thumbnail_image' => $thumbnail_image,
                 'content' => $request->content,
                 'category_id' => $request->category,
             ]);
