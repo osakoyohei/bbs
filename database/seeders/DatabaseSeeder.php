@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Reply;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +20,9 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             UserSeeder::class,
             AdminUserSeeder::class,
+            PostSeeder::class,
+            CommentSeeder::class,
+            ReplySeeder::class,
         ]);
     }
 }
