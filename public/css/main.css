@@ -4,12 +4,16 @@
     color: black;
 }
 
+.bbs-header {
+    margin-bottom: -10px;
+}
+
 .serach-result {
     margin-right: 5px;
 }
 
 .bbs-post {
-    text-align: center;
+    margin-left: 40px;
 }
 
 .posts-flex {

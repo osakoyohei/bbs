@@ -45,7 +45,7 @@
                         @endif
                     </div>
                     <input type="hidden" name="post_id" value="{{ $post->id }}">
-                    <a class="btn btn-secondary" href="/bbs/comment/{{ $post->id }}">キャンセル</a>
+                    <a class="btn btn-secondary" href="{{ route('comment', $post->id) }}">キャンセル</a>
                     <button type="submit" class="btn btn-primary">コメントする</button>
                 </form>
                 <hr>

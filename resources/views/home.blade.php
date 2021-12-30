@@ -11,11 +11,6 @@
                 </div>
             @endif
 
-            <div class="bbs-post">
-                <a class="btn btn-success" href="{{ route('create') }}" role="button">掲示板投稿をする</a>
-            </div>
-            <br>
-
             <a href="" class="bbs-title"><h1>掲示板投稿一覧</h1></a>
             <hr>
 
