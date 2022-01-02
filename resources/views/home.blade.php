@@ -80,7 +80,7 @@
                 </div>
                 <div class="post-thumbnail-image">
                     @if ($post->thumbnail_image === '')
-                        <img src="/storage/no_image.jpg">
+                        <img src="/images/no_image.jpg">
                     @else
                         <img src="data:image/png;base64,{{ $post->thumbnail_image }}"> 
                     @endif
