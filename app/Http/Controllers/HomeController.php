@@ -11,6 +11,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\Reply;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -187,11 +188,12 @@ class HomeController extends Controller
     public function store(PostRequest $request)
     {
         $user_id = \Auth::id();
+        $image = $request->thumbnail_image;
 
-        if ($request->thumbnail_image  === NULL) {
-            $thumbnail_image = base64_encode(file_get_contents($request->thumbnail_image));
+        if (!is_null($image)) {
+            $thumbnail_image = base64_encode(file_get_contents($image));
         } else {
-            $thumbnail_image = base64_encode(file_get_contents($request->thumbnail_image));
+            $thumbnail_image = '';
         }
 
         \DB::beginTransaction();

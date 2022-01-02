@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="thumbnail_image">サムネイル画像</label><br>
+                    <label for="thumbnail_image">サムネイル画像　<span class="file-not-required">※サムネイル画像は必須ではありません</span></label><br>
                     <input type="file" id="thumbnail_image" name="thumbnail_image">
                     @if ($errors->has('image'))
                         <div class="text-danger">

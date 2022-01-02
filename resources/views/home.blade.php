@@ -79,7 +79,11 @@
 
                 </div>
                 <div class="post-thumbnail-image">
-                    <img src="data:image/png;base64,{{ $post->thumbnail_image }}">
+                    @if ($post->thumbnail_image === '')
+                        <img src="/storage/no_image.jpg">
+                    @else
+                        <img src="data:image/png;base64,{{ $post->thumbnail_image }}"> 
+                    @endif
                 </div>
             </div>
                 <hr>
