@@ -16,6 +16,7 @@ class ReplySeeder extends Seeder
     {
         DB::table('replies')->insert([
             [
+                'id' => 1,
                 'user_id' => 1,
                 'comment_id' => 1,
                 'reply' => 'コメントありがとうございます!',
@@ -23,6 +24,7 @@ class ReplySeeder extends Seeder
                 'updated_at' => '2021/12/13 18:18:18',
             ],
             [
+                'id' => 2,
                 'user_id' => 1,
                 'comment_id' => 3,
                 'reply' => 'よろしくお願いします!',
@@ -30,6 +32,7 @@ class ReplySeeder extends Seeder
                 'updated_at' => '2021/12/15 17:17:17',
             ],
             [
+                'id' => 3,
                 'user_id' => 2,
                 'comment_id' => 4,
                 'reply' => 'よろしくです!',
@@ -37,6 +40,7 @@ class ReplySeeder extends Seeder
                 'updated_at' => '2021/12/16 11:11:11',
             ],
             [
+                'id' => 4,
                 'user_id' => 1,
                 'comment_id' => 2,
                 'reply' => 'よろしく!',
@@ -44,6 +48,7 @@ class ReplySeeder extends Seeder
                 'updated_at' => '2021/12/13 15:15:15',
             ],
             [
+                'id' => 5,
                 'user_id' => 4,
                 'comment_id' => 2,
                 'reply' => 'こんにちは!',
@@ -51,6 +56,7 @@ class ReplySeeder extends Seeder
                 'updated_at' => '2021/12/13 19:11:11',
             ],
             [
+                'id' => 6,
                 'user_id' => 2,
                 'comment_id' => 2,
                 'reply' => 'どうも!',

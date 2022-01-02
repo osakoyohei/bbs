@@ -16,6 +16,7 @@ class PostSeeder extends Seeder
     {
         DB::table('posts')->insert([
             [
+                'id' => 1,
                 'user_id' => 1,
                 'title' => 'test1',
                 'thumbnail_image' => '',
@@ -25,6 +26,7 @@ class PostSeeder extends Seeder
                 'updated_at' => '2021/12/13 11:11:11',
             ],
             [
+                'id' => 2,
                 'user_id' => 2,
                 'title' => 'test2',
                 'thumbnail_image' => '',
