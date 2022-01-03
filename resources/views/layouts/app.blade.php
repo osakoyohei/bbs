@@ -31,11 +31,14 @@
                         <h3>BBS</h3>
                     </a>
                 </div>
-                <div class="bbs-post">
-                    <a class="navbar-brand" href="{{ route('create') }}">
-                        掲示板投稿
-                    </a>
-                </div>
+                
+                @if(auth()->user())
+                    <div class="bbs-post">
+                        <a class="navbar-brand" href="{{ route('create') }}">
+                            掲示板投稿
+                        </a>
+                    </div>
+                @endif
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
