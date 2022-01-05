@@ -41,14 +41,15 @@
             </form>
             <hr>
 
-            <!-- 掲示板一覧 -->
+            <!-- 検索結果の数 -->
+            @isset($serach_result)
+                <h5 class="serach-result">{{ $serach_result }}</h5><br>
+                @endisset
             @foreach($posts as $post)
+
+            <!-- 掲示板一覧 -->
             <div class="posts-flex">
-                
                 <div>
-                    @isset($serach_result)
-                    <h5 class="serach-result">{{ $serach_result }}</h5><br>
-                    @endisset
                     <p>投稿者：{{ $post->user->name }}</p>
                     <p>投稿日時：{{ $post->created_at->format('Y/m/d/H:i') }}</p>
                     <p>タイトル：{{ $post->title }}</p>
@@ -59,24 +60,23 @@
                         <div>
                             <p><a href="{{ route('comment', $post->id) }}" class="btn btn-primary">コメント</a></p>
                         </div>
-                    @if ($post->user_id === Auth::id())
-                        <div>
-                            <form method="POST" action="{{ route('delete', $post->id) }}" >
-                            @csrf
-                                <button class="btn btn-light comment-post">
-                                    投稿削除
-                                </button>
-                            </form>
-                        </div>
-                    @else
-                        <div>
-                            <p class="other-post">
-                                他ユーザー投稿
-                            </p>
-                        </div>
-                    @endif
+                        @if ($post->user_id === Auth::id())
+                            <div>
+                                <form method="POST" action="{{ route('delete', $post->id) }}" >
+                                @csrf
+                                    <button class="btn btn-light comment-post">
+                                        投稿削除
+                                    </button>
+                                </form>
+                            </div>
+                        @else
+                            <div>
+                                <p class="other-post">
+                                    他ユーザー投稿
+                                </p>
+                            </div>
+                        @endif
                     </div>
-
                 </div>
                 <div class="post-thumbnail-image">
                     @if ($post->thumbnail_image === '')
