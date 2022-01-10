@@ -27,11 +27,7 @@
                         <p>カテゴリー名：{{ $post->category->name }}</p>
                     </div>
                     <div class="comment-thumbnail-image">
-                        @if ($post->thumbnail_image === '')
-                            <img src="/images/no_image.jpg">
-                        @else
-                            <img src="data:image/png;base64,{{ $post->thumbnail_image }}"> 
-                        @endif
+                        <img src="data:image/png;base64,{{ $post->thumbnail_image }}">
                     </div>
                 </div>
                 <hr>
