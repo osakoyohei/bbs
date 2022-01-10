@@ -56,6 +56,8 @@
                     <p>投稿内容：{{ $post->content }}</p>
                     <p>カテゴリー名：{{ $post->category->name }}</p>
 
+                    <p><i class="fas fa-heart"></i></p>
+
                     <div class="comment-delete-flex">
                         <div>
                             <p><a href="{{ route('comment', $post->id) }}" class="btn btn-primary">コメント</a></p>
