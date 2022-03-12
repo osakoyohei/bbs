@@ -33,7 +33,7 @@
                 </div>
                 
                 @if(auth()->user())
-                    <div class="bbs-post">
+                    <div class="ml-md-4">
                         <a class="navbar-brand" href="{{ route('create') }}">
                             掲示板投稿
                         </a>
